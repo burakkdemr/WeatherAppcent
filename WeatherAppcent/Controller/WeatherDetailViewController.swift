@@ -42,10 +42,6 @@ class WeatherDetailViewController: UIViewController {
     
     
     func getDatasourcesAndDelegates(){
-        
-        DispatchQueue.main.async {
-            
-        }
         self.weatherStatusVC.dataSource = self
         self.weatherStatusVC.delegate = self
         
@@ -117,8 +113,6 @@ class WeatherDetailViewController: UIViewController {
             
             let lblSunset = getFormattedTime(inputTime: jsonResult.sun_set)
             self.lblSunset.text = lblSunset
-           
- 
         }
     }
     

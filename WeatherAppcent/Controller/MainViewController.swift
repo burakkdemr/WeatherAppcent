@@ -36,9 +36,7 @@ class MainViewController: UIViewController {
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        
     }
-    
 }
 
 
@@ -62,13 +60,11 @@ extension MainViewController : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         selectedIndex = indexPath.row
-    
+        
         if let weatherDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "WeatherDetailViewController") as? WeatherDetailViewController{
             weatherDetailVC.woeid = locationModel[selectedIndex].woeid
-            self.navigationController?.pushViewController(weatherDetailVC, animated: true)
-            self.show(weatherDetailVC, sender: nil) // Cozulecek burasi
+            self.navigationController?.pushViewController(weatherDetailVC.self, animated: true)
         }
     }
     
