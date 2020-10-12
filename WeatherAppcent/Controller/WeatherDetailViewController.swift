@@ -58,11 +58,8 @@ class WeatherDetailViewController: UIViewController {
                 self.weatherDetailModel = try decoder.decode(WeatherDetailModel.self, from: result!)
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 
-                
-                DispatchQueue.main.async {
-                    self.weatherStatusVC.reloadData()
-                }
-                
+                self.weatherStatusVC.reloadData()
+            
             }
             catch{
                 print(error)

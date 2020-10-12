@@ -18,64 +18,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nearby Cities.." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ir-w4-nrP">
-                                <rect key="frame" x="20" y="163" width="374" height="96"/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="35"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="keI-1g-m36">
-                                <rect key="frame" x="20" y="309" width="374" height="553"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NearestCitiesTableViewCell" id="DWa-h6-wsj" customClass="NearestCitiesTableViewCell" customModule="WeatherAppcent" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="374" height="43"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DWa-h6-wsj" id="sPe-Am-6xb">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M9E-iV-1Ca">
-                                                    <rect key="frame" x="20" y="11" width="334" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="M9E-iV-1Ca" secondAttribute="trailing" id="1JD-9a-LYl"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="M9E-iV-1Ca" secondAttribute="bottom" id="7fK-SC-2kX"/>
-                                                <constraint firstItem="M9E-iV-1Ca" firstAttribute="top" secondItem="sPe-Am-6xb" secondAttribute="topMargin" id="Oh6-v4-gL9"/>
-                                                <constraint firstItem="M9E-iV-1Ca" firstAttribute="leading" secondItem="sPe-Am-6xb" secondAttribute="leadingMargin" id="lCj-4a-lBZ"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="lblNearCity" destination="M9E-iV-1Ca" id="TMP-xP-yQT"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="2YO-Ki-2od">
+                                <rect key="frame" x="47" y="232" width="320" height="432"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nearby Cities.." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ir-w4-nrP">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="35"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VXY-e4-p0q">
+                                        <rect key="frame" x="0.0" y="216" width="320" height="216"/>
+                                    </pickerView>
+                                </subviews>
+                            </stackView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <viewLayoutGuide key="safeArea" id="hsR-yf-Bf2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="keI-1g-m36" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="11S-C2-dYi"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="keI-1g-m36" secondAttribute="bottom" id="Lsg-b4-zq9"/>
-                            <constraint firstItem="7ir-w4-nrP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="75" id="MrM-Fu-5mh"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="keI-1g-m36" secondAttribute="trailing" constant="20" id="RnV-6V-tsQ"/>
-                            <constraint firstItem="keI-1g-m36" firstAttribute="top" secondItem="7ir-w4-nrP" secondAttribute="bottom" constant="50" id="pKd-AT-iD3"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7ir-w4-nrP" secondAttribute="trailing" constant="20" id="pi1-0f-0fv"/>
-                            <constraint firstItem="7ir-w4-nrP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="uA2-Rq-jcj"/>
+                            <constraint firstItem="2YO-Ki-2od" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="8eS-LR-gyd"/>
+                            <constraint firstItem="2YO-Ki-2od" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="IWt-SL-8qO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="s7b-BO-1be"/>
                     <connections>
-                        <outlet property="nearestTableView" destination="keI-1g-m36" id="2HB-kd-Zm2"/>
+                        <outlet property="picker" destination="VXY-e4-p0q" id="bFj-l4-zot"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-410.14492753623193" y="-90.401785714285708"/>
+            <point key="canvasLocation" x="-266.66666666666669" y="-90.401785714285708"/>
         </scene>
         <!--Weather Detail View Controller-->
         <scene sceneID="K8T-S4-8af">
@@ -355,19 +327,19 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="VFc-RZ-R0b"/>
+                        <viewLayoutGuide key="safeArea" id="u8m-7O-jWt"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="7RW-e5-3Pu" firstAttribute="bottom" secondItem="VFc-RZ-R0b" secondAttribute="bottom" id="7Ll-Uy-AoT"/>
-                            <constraint firstItem="AGv-7o-4Fe" firstAttribute="centerX" secondItem="CRr-4T-N1s" secondAttribute="centerX" id="J6B-z9-DFM"/>
-                            <constraint firstItem="ApK-1a-qca" firstAttribute="leading" secondItem="VFc-RZ-R0b" secondAttribute="leading" constant="20" id="M25-qt-dry"/>
-                            <constraint firstItem="7RW-e5-3Pu" firstAttribute="trailing" secondItem="VFc-RZ-R0b" secondAttribute="trailing" constant="5" id="NgH-02-4Ln"/>
-                            <constraint firstItem="ApK-1a-qca" firstAttribute="top" secondItem="VFc-RZ-R0b" secondAttribute="top" constant="100" id="P8t-5M-bT5"/>
-                            <constraint firstItem="VFc-RZ-R0b" firstAttribute="trailing" secondItem="quB-tb-T0I" secondAttribute="trailing" constant="20" id="Seu-Hs-cnj"/>
-                            <constraint firstItem="AGv-7o-4Fe" firstAttribute="top" secondItem="VFc-RZ-R0b" secondAttribute="top" constant="30" id="YQG-6q-oSJ"/>
+                            <constraint firstItem="7RW-e5-3Pu" firstAttribute="bottom" secondItem="u8m-7O-jWt" secondAttribute="bottom" id="7Ll-Uy-AoT"/>
+                            <constraint firstItem="AGv-7o-4Fe" firstAttribute="centerX" secondItem="u8m-7O-jWt" secondAttribute="centerX" id="J6B-z9-DFM"/>
+                            <constraint firstItem="ApK-1a-qca" firstAttribute="leading" secondItem="u8m-7O-jWt" secondAttribute="leading" constant="20" id="M25-qt-dry"/>
+                            <constraint firstItem="7RW-e5-3Pu" firstAttribute="trailing" secondItem="u8m-7O-jWt" secondAttribute="trailing" constant="5" id="NgH-02-4Ln"/>
+                            <constraint firstItem="ApK-1a-qca" firstAttribute="top" secondItem="u8m-7O-jWt" secondAttribute="top" constant="100" id="P8t-5M-bT5"/>
+                            <constraint firstItem="u8m-7O-jWt" firstAttribute="trailing" secondItem="quB-tb-T0I" secondAttribute="trailing" constant="20" id="Seu-Hs-cnj"/>
+                            <constraint firstItem="AGv-7o-4Fe" firstAttribute="top" secondItem="u8m-7O-jWt" secondAttribute="top" constant="30" id="YQG-6q-oSJ"/>
                             <constraint firstItem="7RW-e5-3Pu" firstAttribute="top" secondItem="quB-tb-T0I" secondAttribute="bottom" id="kp1-pq-f9M"/>
-                            <constraint firstItem="7RW-e5-3Pu" firstAttribute="leading" secondItem="VFc-RZ-R0b" secondAttribute="leading" id="ndW-tN-sIb"/>
-                            <constraint firstItem="quB-tb-T0I" firstAttribute="top" secondItem="VFc-RZ-R0b" secondAttribute="top" constant="30" id="pk0-Db-GWn"/>
+                            <constraint firstItem="7RW-e5-3Pu" firstAttribute="leading" secondItem="u8m-7O-jWt" secondAttribute="leading" id="ndW-tN-sIb"/>
+                            <constraint firstItem="quB-tb-T0I" firstAttribute="top" secondItem="u8m-7O-jWt" secondAttribute="top" constant="30" id="pk0-Db-GWn"/>
                         </constraints>
                     </view>
                     <connections>
@@ -383,7 +355,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bUc-0g-lGS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="363.768115942029" y="-90.401785714285708"/>
+            <point key="canvasLocation" x="786.95652173913061" y="-90.401785714285708"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="301-NN-j4i">
@@ -401,7 +373,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="99h-TE-XWD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1320.289855072464" y="-90.401785714285708"/>
+            <point key="canvasLocation" x="-1320.2898550724642" y="-90.401785714285708"/>
         </scene>
     </scenes>
     <resources>

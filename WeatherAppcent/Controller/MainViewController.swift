@@ -9,10 +9,9 @@ import UIKit
 import Alamofire
 import CoreLocation
 
-
 class MainViewController: UIViewController {
     
-    @IBOutlet weak var nearestTableView: UITableView!
+    @IBOutlet weak var picker: UIPickerView!
     
     
     var locationModel: [LocationModel] = [LocationModel]()
@@ -23,14 +22,15 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDatasorucesAndDelegates()
-        
     }
     
+
     
     func setupDatasorucesAndDelegates(){
         
-        self.nearestTableView.dataSource = self
-        self.nearestTableView.delegate = self
+        self.picker.dataSource = self
+        self.picker.delegate = self
+        
         
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
@@ -41,33 +41,30 @@ class MainViewController: UIViewController {
 
 
 
-
-
-extension MainViewController : UITableViewDelegate,UITableViewDataSource {
+extension MainViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+       
         return locationModel.count
     }
     
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = nearestTableView.dequeueReusableCell(withIdentifier: "NearestCitiesTableViewCell", for: indexPath) as! NearestCitiesTableViewCell
-        
-        let nearCity = self.locationModel[indexPath.row]
-        cell.configureCityListCell(near: nearCity)
-        
-        return cell
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return locationModel[row].title
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIndex = indexPath.row
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        selectedIndex = row
         
         if let weatherDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "WeatherDetailViewController") as? WeatherDetailViewController{
             weatherDetailVC.woeid = locationModel[selectedIndex].woeid
             self.navigationController?.pushViewController(weatherDetailVC.self, animated: true)
         }
     }
-    
 }
 
 
@@ -94,7 +91,7 @@ extension MainViewController : CLLocationManagerDelegate {
                         decoder.keyDecodingStrategy = .convertFromSnakeCase
                         
                         DispatchQueue.main.async {
-                            self.nearestTableView.reloadData()
+                            self.picker.reloadAllComponents()
                         }
                     }
                     catch{
