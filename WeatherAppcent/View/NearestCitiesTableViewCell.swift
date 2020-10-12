@@ -22,5 +22,8 @@ class NearestCitiesTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    func configureCityListCell(near:LocationModel){
+        self.lblNearCity.text = near.title
+    }
 }
