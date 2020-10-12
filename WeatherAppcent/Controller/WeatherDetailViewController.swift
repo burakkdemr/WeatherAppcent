@@ -33,7 +33,7 @@ class WeatherDetailViewController: UIViewController {
         super.viewDidLoad()
         
         getDatasourcesAndDelegates()
-        getWeatherDetail()
+        getWeatherAndTimeDetail()
         
     }
     
@@ -50,7 +50,7 @@ class WeatherDetailViewController: UIViewController {
     }
     
     
-    func getWeatherDetail(){
+    func getWeatherAndTimeDetail(){
         let url = "https://www.metaweather.com/api/location/\(woeid ?? -1)"
         
         AF.request(url).responseJSON { (response) in
@@ -85,56 +85,35 @@ class WeatherDetailViewController: UIViewController {
             self.lblCityName.text = jsonResult.title
             
             
+            let formatted = DateFormatter()
+            formatted.locale = Locale(identifier: "en_US_POSIX")
+            formatted.timeZone = TimeZone(abbreviation: jsonResult.timezone_name)
+            formatted.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
             
-            
-            var timeCounter = 0
-            
-            while timeCounter < 3 {
+            func getFormattedTime(inputTime inputStr: String) -> String {
                 
-                let formatted = DateFormatter()
-                formatted.locale = Locale(identifier: "en_US_POSIX")
-                formatted.timeZone = TimeZone(abbreviation: jsonResult.timezone_name)
-                formatted.timeZone = .autoupdatingCurrent
-                formatted.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
+                var formattedTime:String?
                 
-                switch timeCounter {
-                case 0:
-                    let inputTime = jsonResult.time
-                    if let time = formatted.date(from: inputTime) {
-                        let formatter = DateFormatter()
-                        formatter.dateFormat = "h:mm a"
-                        self.lblTime.text = formatter.string(from: time)
-                        
-                    }
-                case 2:
-                    let inputSunset = jsonResult.sun_set
-                    if let time = formatted.date(from: inputSunset) {
-                        let formatter = DateFormatter()
-                        formatter.dateFormat = "h:mm a"
-                        self.lblSunset.text = formatter.string(from: time)
-                        
-                    }
-                case 1:
-                    let inputSunRise = jsonResult.sun_rise
-                    if let time = formatted.date(from: inputSunRise) {
-                        let formatter = DateFormatter()
-                        formatter.dateFormat = "h:mm a"
-                        self.lblSunrise.text = formatter.string(from: time)
-                        
-                    }
-                    
-                default:
-                    print("error")
+                if let time = formatted.date(from: inputStr) {
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "h:mm a"
+                    formattedTime =  formatter.string(from: time)
                 }
-                
-                
-                timeCounter += 1
+                return formattedTime ?? "unknown"
             }
             
+            let lblTime = getFormattedTime(inputTime: jsonResult.time)
+            self.lblTime.text = lblTime
             
+            let lblSunrise = getFormattedTime(inputTime: jsonResult.sun_rise)
+            self.lblSunrise.text = lblSunrise
+            
+            let lblSunset = getFormattedTime(inputTime: jsonResult.sun_set)
+            self.lblSunset.text = lblSunset
+           
+ 
         }
     }
-    
     
 }
 
