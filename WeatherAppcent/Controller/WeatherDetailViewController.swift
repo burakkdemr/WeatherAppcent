@@ -19,6 +19,8 @@ class WeatherDetailViewController: UIViewController {
     @IBOutlet weak var lblTime: UILabel!
     @IBOutlet weak var lblSunrise: UILabel!
     @IBOutlet weak var lblSunset: UILabel!
+    @IBOutlet weak var lblTheTemp: UILabel!
+    @IBOutlet weak var lblWeatherStateName: UILabel!
     
     
     var weatherDetailModel : WeatherDetailModel?
@@ -84,6 +86,11 @@ class WeatherDetailViewController: UIViewController {
             self.lblCountryName.text = jsonResult.parent.title
             self.lblCityName.text = jsonResult.title
             
+            
+            for item in 0..<consolidatedResult.count{
+                self.lblTheTemp.text = "\(String(format: "%.1f", consolidatedResult[item].the_temp))℃"
+                self.lblWeatherStateName.text = consolidatedResult[item].weather_state_name
+            }
             
             let formatted = DateFormatter()
             formatted.locale = Locale(identifier: "en_US_POSIX")
