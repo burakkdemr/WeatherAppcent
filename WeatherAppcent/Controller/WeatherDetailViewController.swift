@@ -7,6 +7,8 @@
 
 import UIKit
 import Alamofire
+import SkeletonView
+
 
 class WeatherDetailViewController: UIViewController {
     
@@ -23,6 +25,7 @@ class WeatherDetailViewController: UIViewController {
     @IBOutlet weak var lblWeatherStateName: UILabel!
     
     
+    
     var weatherDetailModel : WeatherDetailModel?
     var consolidatedResponse = [ConsolidatedResponse]()
     var parentResponse = [ParentResponse]()
@@ -34,14 +37,18 @@ class WeatherDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.showAnimatedSkeleton()
+        
         getDatasourcesAndDelegates()
         getWeatherAndTimeDetail()
         
+        self.view.hideSkeleton()
     }
-    
+        
     
     
     func getDatasourcesAndDelegates(){
+        
         self.weatherStatusVC.dataSource = self
         self.weatherStatusVC.delegate = self
         
@@ -51,7 +58,8 @@ class WeatherDetailViewController: UIViewController {
     func getWeatherAndTimeDetail(){
         let url = "https://www.metaweather.com/api/location/\(woeid ?? -1)"
         
-        AF.request(url).responseJSON { (response) in
+        
+        AF.request(url).responseJSON { [self] (response) in
             let result = response.data
             do{
                 let decoder = JSONDecoder()
@@ -59,7 +67,7 @@ class WeatherDetailViewController: UIViewController {
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 
                 self.weatherStatusVC.reloadData()
-            
+                
             }
             catch{
                 print(error)
@@ -76,19 +84,25 @@ class WeatherDetailViewController: UIViewController {
             let parentResult = jsonResult.parent
             self.parentResponse = [parentResult]
             
+            
+            //Country and City
             self.lblCountryName.text = jsonResult.parent.title
             self.lblCityName.text = jsonResult.title
             
             
+            //CUrrent Weather Temp and Weather State Name
             for item in 0..<consolidatedResult.count{
                 self.lblTheTemp.text = "\(String(format: "%.1f", consolidatedResult[item].the_temp))℃"
                 self.lblWeatherStateName.text = consolidatedResult[item].weather_state_name
             }
             
+            
+            
+            //Date Format for time sunrise and sunset
             let formatted = DateFormatter()
             formatted.locale = Locale(identifier: "en_US_POSIX")
-            formatted.timeZone = TimeZone(abbreviation: jsonResult.timezone_name)
-            formatted.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
+            formatted.timeZone = TimeZone(identifier: jsonResult.timezone)
+            formatted.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSz"
             
             func getFormattedTime(inputTime inputStr: String) -> String {
                 
@@ -110,7 +124,10 @@ class WeatherDetailViewController: UIViewController {
             
             let lblSunset = getFormattedTime(inputTime: jsonResult.sun_set)
             self.lblSunset.text = lblSunset
+            
+            
         }
+        
     }
     
 }

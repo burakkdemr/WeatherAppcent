@@ -43,6 +43,9 @@ class WeatherStatusCollectionViewCell: UICollectionViewCell {
         self.lblVisibility.text = "\(String(format: "%.1f", detail.visibility)) miles"
         self.lblPressure.text = "\(String(format: "%.f", detail.air_pressure))mb"
         self.lblPredictability.text = "\(detail.predictability)%"
+        
+        
+        
 
     }
 }
