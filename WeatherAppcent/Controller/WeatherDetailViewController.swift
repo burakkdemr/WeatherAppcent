@@ -90,12 +90,7 @@ class WeatherDetailViewController: UIViewController {
             self.lblCityName.text = jsonResult.title
             
             
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            let currentDay = Date()
-           
-            //CUrrent Weather Temp and Weather State Name
-            if dateFormatter.string(from: currentDay) == consolidatedResult.first?.applicable_date{
+            if consolidatedResult.first?.id != nil {
                 self.lblWeatherStateName.text = consolidatedResult.first?.weather_state_name
                 self.lblTheTemp.text = "\(String(format: "%.1f", consolidatedResult.first?.the_temp as! CVarArg))℃"
             }else{
@@ -108,7 +103,7 @@ class WeatherDetailViewController: UIViewController {
             let formatted = DateFormatter()
             formatted.locale = Locale(identifier: "en_US_POSIX")
             formatted.timeZone = TimeZone(identifier: jsonResult.timezone)
-            formatted.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSz"
+            formatted.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
             
             func getFormattedTime(inputTime inputStr: String) -> String {
                 
