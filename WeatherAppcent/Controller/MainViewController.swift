@@ -86,7 +86,7 @@ extension MainViewController : CLLocationManagerDelegate {
                     let result = response.data
                     do{
                         let decoder = JSONDecoder()
-                        self.locationModel = try JSONDecoder().decode([LocationModel].self, from: result!)
+                        self.locationModel = try decoder.decode([LocationModel].self, from: result!)
                         
                         decoder.keyDecodingStrategy = .convertFromSnakeCase
                         

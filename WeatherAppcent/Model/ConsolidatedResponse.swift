@@ -9,6 +9,7 @@ import Foundation
 
 struct ConsolidatedResponse: Codable {
     var id: Int
+    var created:String
     var applicable_date: String
     var weather_state_name: String
     var weather_state_abbr: String

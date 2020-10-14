@@ -99,11 +99,14 @@ class WeatherDetailViewController: UIViewController {
             }
             
             
+            
             //Date Format for time sunrise and sunset
             let formatted = DateFormatter()
             formatted.locale = Locale(identifier: "en_US_POSIX")
-            formatted.timeZone = TimeZone(identifier: jsonResult.timezone)
             formatted.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
+            formatted.timeZone = TimeZone(identifier: jsonResult.timezone)
+            
+          
             
             func getFormattedTime(inputTime inputStr: String) -> String {
                 
@@ -180,11 +183,7 @@ extension WeatherDetailViewController : UICollectionViewDelegate, UICollectionVi
         
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("selected \(indexPath.row+1)")
-    }
-    
+        
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
