@@ -68,8 +68,6 @@ class WeatherStatusCollectionViewCell: UICollectionViewCell {
         let tomorrowDate = Calendar.current.date(byAdding: .day, value: 1, to: dates)!
         let tomorrow = formatted.string(from: tomorrowDate)
         
-        
-        print(tomorrow)
 
         if detail.applicable_date == today {
             self.lblDate.text = "Today"

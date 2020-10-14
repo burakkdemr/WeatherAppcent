@@ -343,6 +343,9 @@
                             <constraint firstItem="u8m-7O-jWt" firstAttribute="trailing" secondItem="quB-tb-T0I" secondAttribute="trailing" constant="20" id="a6Z-dq-iGK"/>
                             <constraint firstItem="7RW-e5-3Pu" firstAttribute="bottom" secondItem="u8m-7O-jWt" secondAttribute="bottom" id="ySN-yL-neG"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
                         <outlet property="lblCityName" destination="dwI-rq-XzH" id="kPV-KB-bgC"/>

@@ -37,14 +37,14 @@ class WeatherDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.showAnimatedSkeleton()
+        let gradient = SkeletonGradient(baseColor: UIColor.clouds)
+        self.view.showGradientSkeleton(usingGradient: gradient)
         
         getDatasourcesAndDelegates()
         getWeatherAndTimeDetail()
         
-        self.view.hideSkeleton()
     }
-        
+    
     
     
     func getDatasourcesAndDelegates(){
@@ -125,6 +125,7 @@ class WeatherDetailViewController: UIViewController {
             let lblSunset = getFormattedTime(inputTime: jsonResult.sun_set)
             self.lblSunset.text = lblSunset
             
+            self.view.hideSkeleton()
             
         }
         
