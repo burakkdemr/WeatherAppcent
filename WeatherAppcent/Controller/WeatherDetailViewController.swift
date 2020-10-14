@@ -90,12 +90,18 @@ class WeatherDetailViewController: UIViewController {
             self.lblCityName.text = jsonResult.title
             
             
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let currentDay = Date()
+           
             //CUrrent Weather Temp and Weather State Name
-            for item in 0..<consolidatedResult.count{
-                self.lblTheTemp.text = "\(String(format: "%.1f", consolidatedResult[item].the_temp))℃"
-                self.lblWeatherStateName.text = consolidatedResult[item].weather_state_name
+            if dateFormatter.string(from: currentDay) == consolidatedResult.first?.applicable_date{
+                self.lblWeatherStateName.text = consolidatedResult.first?.weather_state_name
+                self.lblTheTemp.text = "\(String(format: "%.1f", consolidatedResult.first?.the_temp as! CVarArg))℃"
+            }else{
+                self.lblWeatherStateName.text = "unknown"
+                self.lblTheTemp.text = "unknown"
             }
-            
             
             
             //Date Format for time sunrise and sunset
